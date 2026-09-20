@@ -1,0 +1,1 @@
+"I developed a FastAPI-based cybersecurity threat detection dashboard that analyzes authentication logs, identifies repeated failed login attempts, detects potential brute-force attacks, and displays risk information through an interactive web interface."

@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        CyberGuard - AI Cybersecurity Threat Detection
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- ================================================= -->
+    <!-- HEADER -->
+    <!-- ================================================= -->
+
+    <header>
+
+        <div class="logo">
+            🛡️
+        </div>
+
+        <h1>
+            CyberGuard
+        </h1>
+
+        <p>
+            AI-Powered Cybersecurity Threat Detection
+        </p>
+
+    </header>
+
+
+
+    <!-- ================================================= -->
+    <!-- SUMMARY CARDS -->
+    <!-- ================================================= -->
+
+    <section class="summary">
+
+
+        <div class="summary-card">
+
+            <h3>
+                Total Logs
+            </h3>
+
+            <div id="totalLogs">
+                -
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <h3>
+                Failed Attempts
+            </h3>
+
+            <div id="failedAttempts">
+                -
+            </div>
+
+        </div>
+
+
+        <div class="summary-card threat-card">
+
+            <h3>
+                Threats Detected
+            </h3>
+
+            <div id="threatCount">
+                -
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================================================= -->
+    <!-- SECURITY SCORE -->
+    <!-- ================================================= -->
+
+    <section class="panel security-score-panel">
+
+        <h2>
+            🛡️ CyberGuard Security Score
+        </h2>
+
+        <p class="subtitle">
+            Overall security assessment based on detected activity.
+        </p>
+
+
+        <div class="security-score-container">
+
+
+            <div class="score-circle">
+
+                <div class="score-circle-inner">
+
+                    <strong id="securityScore">
+                        -
+                    </strong>
+
+                    <span>
+                        / 100
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="score-details">
+
+                <h3 id="securityScoreLevel">
+                    Awaiting Analysis
+                </h3>
+
+
+                <p id="securityScoreMessage">
+
+                    Analyze your security logs to calculate
+                    the overall security score.
+
+                </p>
+
+
+                <div class="score-bar">
+
+                    <div
+                        id="securityScoreBar"
+                        class="score-bar-fill"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================================================= -->
+    <!-- ANALYZE LOGS -->
+    <!-- ================================================= -->
+
+    <section class="panel">
+
+        <h2>
+            🔍 Analyze Security Logs
+        </h2>
+
+
+        <p class="subtitle">
+            Upload a security log file or analyze the sample logs.
+        </p>
+
+
+        <div class="upload-area">
+
+            <input
+                type="file"
+                id="logFile"
+                accept=".txt"
+            >
+
+        </div>
+
+
+        <div class="button-row">
+
+
+            <button
+                class="primary-btn"
+                onclick="analyzeSample()"
+            >
+
+                🔎 Analyze Sample Logs
+
+            </button>
+
+
+            <button
+                class="primary-btn"
+                onclick="analyzeUploadedFile()"
+            >
+
+                📁 Analyze Uploaded File
+
+            </button>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================================================= -->
+    <!-- SYSTEM STATUS -->
+    <!-- ================================================= -->
+
+    <section class="panel">
+
+        <h2>
+            🛡️ System Status
+        </h2>
+
+
+        <div class="status-grid">
+
+
+            <div class="status-card">
+
+                <div class="status-icon green">
+                    ●
+                </div>
+
+
+                <div>
+
+                    <span>
+                        System Status
+                    </span>
+
+                    <strong id="systemStatus">
+                        Active
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="status-card">
+
+                <div class="status-icon">
+                    🤖
+                </div>
+
+
+                <div>
+
+                    <span>
+                        ML Model
+                    </span>
+
+                    <strong>
+                        Random Forest
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="status-card">
+
+                <div class="status-icon">
+                    📄
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Log Analysis
+                    </span>
+
+                    <strong>
+                        Active
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================================================= -->
+    <!-- AI RISK ANALYSIS -->
+    <!-- ================================================= -->
+
+    <section class="panel">
+
+
+        <h2>
+            🤖 AI Risk Analysis
+        </h2>
+
+
+        <div
+            id="aiResult"
+            class="empty-message"
+        >
+
+            Click "Analyze Sample Logs" to run the AI model.
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================================================= -->
+    <!-- THREAT DETECTION -->
+    <!-- ================================================= -->
+
+    <section class="panel">
+
+
+        <h2>
+            🚨 Threat Detection Results
+        </h2>
+
+
+        <div id="threatResults">
+
+            <div class="empty-message">
+
+                Click "Analyze Sample Logs" to scan
+                the security logs.
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================================================= -->
+    <!-- SECURITY ANALYTICS -->
+    <!-- ================================================= -->
+
+    <section class="panel">
+
+
+        <h2>
+            📊 Security Analytics
+        </h2>
+
+
+        <div class="analytics-grid">
+
+
+            <div class="chart-card">
+
+
+                <h3>
+                    Failed Attempts by IP
+                </h3>
+
+
+                <div id="barChart">
+
+                    <p class="empty-message">
+                        Analyze logs to view activity.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="chart-card">
+
+
+                <h3>
+                    Threat Distribution
+                </h3>
+
+
+                <div class="donut-container">
+
+
+                    <div
+                        id="donutChart"
+                        class="donut"
+                    >
+
+
+                        <div class="donut-hole">
+
+
+                            <span id="donutNumber">
+                                0
+                            </span>
+
+
+                            <small>
+                                Threats
+                            </small>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="legend">
+
+
+                    <span>
+                        <i class="high"></i>
+                        High
+                    </span>
+
+
+                    <span>
+                        <i class="medium"></i>
+                        Medium
+                    </span>
+
+
+                    <span>
+                        <i class="low"></i>
+                        Low
+                    </span>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="analytics-summary">
+
+
+            <div>
+
+                <span>
+                    AI Risk Score
+                </span>
+
+                <strong id="analyticsRisk">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Threat Level
+                </span>
+
+                <strong id="analyticsLevel">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    Threats Detected
+                </span>
+
+                <strong id="analyticsThreats">
+                    -
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================================================= -->
+    <!-- THREAT INTELLIGENCE -->
+    <!-- ================================================= -->
+
+    <section class="panel">
+
+
+        <h2>
+            🔎 Threat Intelligence
+        </h2>
+
+
+        <p class="subtitle">
+            Detailed information about detected security threats.
+        </p>
+
+
+        <div class="table-container">
+
+
+            <table>
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            IP Address
+                        </th>
+
+                        <th>
+                            Failed Attempts
+                        </th>
+
+                        <th>
+                            Threat
+                        </th>
+
+                        <th>
+                            Risk
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="threatTableBody">
+
+
+                    <tr>
+
+                        <td colspan="5">
+
+                            No threats detected yet.
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================================================= -->
+    <!-- SECURITY RECOMMENDATIONS -->
+    <!-- ================================================= -->
+
+    <section class="panel recommendation-section">
+
+
+        <h2>
+            🛡️ Security Recommendations
+        </h2>
+
+
+        <p class="subtitle">
+            Recommended actions based on detected security threats.
+        </p>
+
+
+        <div id="recommendations">
+
+
+            <div class="recommendation-empty">
+
+
+                <div class="recommendation-icon">
+                    🛡️
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Recommendations Awaiting Analysis
+                    </h3>
+
+
+                    <p>
+
+                        Analyze your security logs to receive
+                        recommended security actions.
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================================================= -->
+    <!-- EXPORT SECURITY REPORT -->
+    <!-- ================================================= -->
+
+    <section class="panel export-section">
+
+
+        <h2>
+            📄 Security Report
+        </h2>
+
+
+        <p class="subtitle">
+
+            Generate a downloadable security report
+            from the latest analysis.
+
+        </p>
+
+
+        <div class="export-box">
+
+
+            <div class="export-info">
+
+                <div class="export-icon">
+                    📋
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        CyberGuard Security Report
+                    </h3>
+
+
+                    <p>
+                        Includes AI risk analysis,
+                        detected threats, security score,
+                        and recommendations.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="primary-btn export-btn"
+                onclick="exportSecurityReport()"
+            >
+
+                📥 Download Security Report
+
+            </button>
+
+
+        </div>
+
+
+        <p
+            id="exportStatus"
+            class="export-status"
+        ></p>
+
+
+    </section>
+
+
+
+    <!-- ================================================= -->
+    <!-- FOOTER -->
+    <!-- ================================================= -->
+
+    <footer>
+
+        <p>
+            CyberGuard • AI-Powered Cybersecurity Threat Detection
+        </p>
+
+    </footer>
+
+
+</div>
+
+
+
+<script src="/static/script.js"></script>
+
+
+</body>
+
+</html>
